@@ -32,7 +32,7 @@ public class NotificationService {
     }
 
     public NotificationPreference upsertPreference(UpsertNotificationPreference preference) {
-        Optional<NotificationPreference> userNotificationPreferenceOptional = preferenceRepository.findUserById(preference.getUserId());
+        Optional<NotificationPreference> userNotificationPreferenceOptional = preferenceRepository.findNotificationPreferenceByUserId(preference.getUserId());
 
         if (userNotificationPreferenceOptional.isPresent()) {
             NotificationPreference userNotificationPreference = userNotificationPreferenceOptional.get();
@@ -56,7 +56,7 @@ public class NotificationService {
         return preferenceRepository.save(userNotificationPreference);
     }
     public NotificationPreference getPreferenceByUserId(UUID userId) {
-        return preferenceRepository.findUserById(userId).orElseThrow(() -> new NullPointerException("Notification preference for user id %s was not found.".formatted(userId)));
+        return preferenceRepository.findNotificationPreferenceByUserId(userId).orElseThrow(() -> new NullPointerException("Notification preference for user id %s was not found.".formatted(userId)));
     }
     public Notification sendNotification(NotificationRequest notificationRequest) {
 
@@ -76,6 +76,7 @@ public class NotificationService {
                 .subject(notificationRequest.getSubject())
                 .body(notificationRequest.getBody())
                 .createdOn(LocalDateTime.now())
+                .updatedOn(LocalDateTime.now())
                 .userId(userId)
                 .isDeleted(false)
                 .type(NotificationType.EMAIL)

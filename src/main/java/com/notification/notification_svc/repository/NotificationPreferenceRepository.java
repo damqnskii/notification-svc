@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface NotificationPreferenceRepository extends JpaRepository<NotificationPreference, UUID> {
-    Optional<NotificationPreference> findUserById(UUID id);
+    Optional<NotificationPreference> findNotificationPreferenceByUserId(UUID id);
 }

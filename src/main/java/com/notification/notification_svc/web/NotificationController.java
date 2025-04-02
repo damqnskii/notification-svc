@@ -94,12 +94,6 @@ public class NotificationController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> getHelloWorld(@RequestParam(name = "name") String name) {
-
-        return ResponseEntity.ok("Hello, " + name + " user!");
-    }
-
     @PutMapping
     public ResponseEntity<Void> retryFailedNotifications(@RequestParam(name = "userId") UUID userId) {
 
