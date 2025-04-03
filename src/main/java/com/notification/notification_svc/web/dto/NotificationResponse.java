@@ -17,5 +17,7 @@ public class NotificationResponse {
 
     private NotificationStatus status;
 
+    private String body;
+
     private NotificationType type;
 }
